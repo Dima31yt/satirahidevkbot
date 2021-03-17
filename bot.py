@@ -84,6 +84,9 @@ for event in longpoll.listen():
 		id = event.obj.peer_id
 		user = event.obj.user_id
 		a_time = event.obj.timestamp
+		
+		if event.object.payload.get('type') == 'cmmunic':
+			sender_me(user, "Опишите вашу проблему ему - vk.com/maaaasyyyniiik")
 
 		if event.object.payload.get('type') == 'report_appeal':
 			sender(2000000001, "Пользователь " + report_u_n_f + " был обжалован")
