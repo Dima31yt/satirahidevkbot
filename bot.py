@@ -16,7 +16,7 @@ longpoll = VkBotLongPoll(vk_session, 201980948)
 vk = vk_session.get_api()
 
 #Авторизация через user аккаунт
-token_m = "e6ab0802a6552315c0d6d31eb03f5d03f39320ebfe474ee8a2c9310c7ee4bddaffd2c27de54578dcf34bc"
+token_m = "9be2c0c01d2192faaa3e6006b576ca2f48d180e218915e25f6c306002d0f46a8d7bd7e67f0596d5a70171"
 vk_sessionss = vk_api.VkApi(token=token_m)
 vks = vk_sessionss.get_api()
 
