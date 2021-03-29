@@ -1,5 +1,7 @@
 ## -*- coding: utf-8 -*-
 import vk_api, json, random, time, requests, wikipedia, os
+from vk_api import VkUpload
+from vkbottle import *
 from googletrans import Translator
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
@@ -16,9 +18,14 @@ longpoll = VkBotLongPoll(vk_session, 201980948)
 vk = vk_session.get_api()
 
 #Авторизация через user аккаунт
-token_m = "9be2c0c01d2192faaa3e6006b576ca2f48d180e218915e25f6c306002d0f46a8d7bd7e67f0596d5a70171"
+token_m = "9e74e24057621d5387bc313f9929e42b12be947e58b9edbbbb770fc7d782aae1f818fa23d62019c75c696"
 vk_sessionss = vk_api.VkApi(token=token_m)
 vks = vk_sessionss.get_api()
+
+
+token = "c482f406afae454c3aa8384e0c39f598e8e317c4011819ae492e663af85a0a2345db0bde5b4341c204cef"
+vk_session_u = vk_api.VkApi(login = '+79005131326', password="Dima8950", token=token)
+vk_u = vk_session_u.get_api()
 
 #-------------------ФУНКЦИИ--------------------#
 
@@ -76,15 +83,13 @@ wikipedia.set_lang("RU")
 #Параметр offset для поиска видео
 offset = 0
 
-sender_me(400484262, 'Бот запущен')
-
 #-------------------ЦИКЛ--------------------#
 for event in longpoll.listen():
 	if event.type == VkBotEventType.MESSAGE_EVENT:			#Обработка нажатия на CallBack кнопку
 		id = event.obj.peer_id
 		user = event.obj.user_id
 		a_time = event.obj.timestamp
-		
+
 		if event.object.payload.get('type') == 'cmmunic':
 			sender_me(user, "Опишите вашу проблему ему - vk.com/maaaasyyyniiik")
 
@@ -421,6 +426,7 @@ for event in longpoll.listen():
 						join_n_f_id = "[id" + str(invite_id) + "|" + join_n_f + "]"
 						join_id_text = 'Привет, ' + join_n_f_id + '!<br>Я - Сатира, <br>Приветствую, тебя, в нашей беседе.<br>Меня призвали из древних сказок, и теперь я служу вам, слежу за порядком и помогаю приятно провести время.<br>С моими командами ты можешь ознакомиться написав: Cатира команды.'
 						sender(id, join_id_text)
+						vk.messages.removeChatUser(chat_id=chat_id1, user_id=str(event.obj.action["member_id"]))
 
 				except:
 					a = 1
@@ -505,9 +511,11 @@ for event in longpoll.listen():
 							hug1 = msg.replace('сатира обнять ', '')
 							hug_w_n = hug1.split("|")[0].replace("[id", "")
 
-						hug_r = open('arts\\hug.txt', 'r')
-						hug_p = hug_r.read().splitlines()
-						hug_r.close()
+						###Идентификатор альбома ----- 277598460
+						album_hug = vk_u.photos.get(owner_id=-201980948, album_id=277598460)
+						hug_p1 = random.choice(album_hug["items"])
+						hug_p = 'photo' + str(hug_p1["owner_id"]) + "_" + str(hug_p1["id"])
+
 						hug_n_u = vk.users.get(user_ids=user)
 						hug_n_1 = hug_n_u[0]["first_name"]
 						hug_n_2 = hug_n_u[0]["last_name"]
@@ -524,7 +532,7 @@ for event in longpoll.listen():
 						hug_w_1 = hug_w_u_n[0]["first_name"]
 						hug_w_2 = hug_w_u_n[0]["last_name"]
 						hug_w_n_f = hug_w_1 + ' ' + hug_w_2
-						send(id, '[id' + str(user) + '|' + hug_n_f + '] ' + hug_sex_s + ' [id' + str(hug_w_n) + '|' + hug_w_n_f + ']', random.choice(hug_p))
+						send(id, '[id' + str(user) + '|' + hug_n_f + '] ' + hug_sex_s + ' [id' + str(hug_w_n) + '|' + hug_w_n_f + ']', hug_p)
 
 					if "сатира поцеловать" in event.obj.text.lower():
 						if (len(te2xt) == 2):
@@ -534,9 +542,11 @@ for event in longpoll.listen():
 							kiss1 = msg.replace('сатира поцеловать ', '')
 							kiss_w_n = kiss1.split("|")[0].replace("[id", "")
 
-						kiss_r = open('arts\\kiss.txt', 'r')
-						kiss_p = kiss_r.read().splitlines()
-						kiss_r.close()
+						###Идентификатор альбома ----- 277597858
+						album_kiss = vk_u.photos.get(owner_id=-201980948, album_id=277597858)
+						kiss_p1 = random.choice(album_kiss["items"])
+						kiss_p = 'photo' + str(kiss_p1["owner_id"]) + "_" + str(kiss_p1["id"])
+
 						kiss_n_u = vk.users.get(user_ids=user)
 						kiss_n_1 = kiss_n_u[0]["first_name"]
 						kiss_n_2 = kiss_n_u[0]["last_name"]
@@ -553,7 +563,7 @@ for event in longpoll.listen():
 						kiss_w_1 = kiss_w_u_n[0]["first_name"]
 						kiss_w_2 = kiss_w_u_n[0]["last_name"]
 						kiss_w_n_f = kiss_w_1 + ' ' + kiss_w_2
-						send(id, '[id' + str(user) + '|' + kiss_n_f + '] ' + kiss_sex_s + ' [id' + str(kiss_w_n) + '|' + kiss_w_n_f + ']', random.choice(kiss_p))
+						send(id, '[id' + str(user) + '|' + kiss_n_f + '] ' + kiss_sex_s + ' [id' + str(kiss_w_n) + '|' + kiss_w_n_f + ']', kiss_p)
 
 					if "сатира отшлëпать" in event.obj.text.lower():
 						if (len(te2xt) == 2):
@@ -562,10 +572,12 @@ for event in longpoll.listen():
 						if (len(te2xt) == 3):
 							slap1 = msg.replace('сатира отшлëпать ', '')
 							slap_w_n = slap1.split("|")[0].replace("[id", "")
+						
+						###Идентификатор альбома ----- 277598113
+						album_slap = vk_u.photos.get(owner_id=-201980948, album_id=277598113)
+						slap_p1 = random.choice(album_slap["items"])
+						slap_p = 'photo' + str(slap_p1["owner_id"]) + "_" + str(slap_p1["id"])
 
-						slap_r = open('arts\\slap.txt', 'r')
-						slap_p = slap_r.read().splitlines()
-						slap_r.close()
 						slap_n_u = vk.users.get(user_ids=user)
 						slap_n_1 = slap_n_u[0]["first_name"]
 						slap_n_2 = slap_n_u[0]["last_name"]
@@ -582,36 +594,38 @@ for event in longpoll.listen():
 						slap_w_1 = slap_w_u_n[0]["first_name"]
 						slap_w_2 = slap_w_u_n[0]["last_name"]
 						slap_w_n_f = slap_w_1 + ' ' + slap_w_2
-						send(id, '[id' + str(user) + '|' + slap_n_f + '] ' + slap_sex_s + ' [id' + str(slap_w_n) + '|' + slap_w_n_f + ']', random.choice(slap_p))
+						send(id, '[id' + str(user) + '|' + slap_n_f + '] ' + slap_sex_s + ' [id' + str(slap_w_n) + '|' + slap_w_n_f + ']', slap_p)
 
 					if "сатира трахнуть" in event.obj.text.lower():
 						if (len(te2xt) == 2):
-							slap_w_n = reply["from_id"]
+							fuck_w_n = reply["from_id"]
 
 						if (len(te2xt) == 3):
-							slap1 = msg.replace('сатира отшлëпать ', '')
-							slap_w_n = slap1.split("|")[0].replace("[id", "")
+							fuck1 = msg.replace('сатира трахнуть ', '')
+							fuck_w_n = fuck1.split("|")[0].replace("[id", "")
 
-						slap_r = open('arts\\slap.txt', 'r')
-						slap_p = slap_r.read().splitlines()
-						slap_r.close()
-						slap_n_u = vk.users.get(user_ids=user)
-						slap_n_1 = slap_n_u[0]["first_name"]
-						slap_n_2 = slap_n_u[0]["last_name"]
-						slap_n_f = slap_n_1 + ' ' + slap_n_2
-						slap_sex1 = vk_session.method('users.get', {'user_ids' : str(user), 'fields' : 'sex', 'name_case' : 'nom'})
-						slap_sex0 = slap_sex1[0]
-						slap_sex = json.dumps(slap_sex0['sex'])
-						slap_sex_s = ''
-						if int(slap_sex) == 1:
-							slap_sex_s = 'принудила к интиму'
-						if int(slap_sex) == 2:
-							slap_sex_s = 'принудил к интиму'
-						slap_w_u_n = vk.users.get(user_ids=slap_w_n, name_case='gen')
-						slap_w_1 = slap_w_u_n[0]["first_name"]
-						slap_w_2 = slap_w_u_n[0]["last_name"]
-						slap_w_n_f = slap_w_1 + ' ' + slap_w_2
-						send(id, '[id' + str(user) + '|' + slap_n_f + '] ' + slap_sex_s + ' [id' + str(slap_w_n) + '|' + slap_w_n_f + ']', random.choice(slap_p))
+						###Идентификатор альбома ----- 277598113
+						album_fuck = vk_u.photos.get(owner_id=-201980948, album_id=277598113)
+						fuck_p1 = random.choice(album_fuck["items"])
+						fuck_p = 'photo' + str(fuck_p1["owner_id"]) + "_" + str(fuck_p1["id"])
+
+						fuck_n_u = vk.users.get(user_ids=user)
+						fuck_n_1 = fuck_n_u[0]["first_name"]
+						fuck_n_2 = fuck_n_u[0]["last_name"]
+						fuck_n_f = fuck_n_1 + ' ' + fuck_n_2
+						fuck_sex1 = vk_session.method('users.get', {'user_ids' : str(user), 'fields' : 'sex', 'name_case' : 'nom'})
+						fuck_sex0 = fuck_sex1[0]
+						fuck_sex = json.dumps(fuck_sex0['sex'])
+						fuck_sex_s = ''
+						if int(fuck_sex) == 1:
+							fuck_sex_s = 'принудила к интиму'
+						if int(fuck_sex) == 2:
+							fuck_sex_s = 'принудил к интиму'
+						fuck_w_u_n = vk.users.get(user_ids=fuck_w_n, name_case='gen')
+						fuck_w_1 = fuck_w_u_n[0]["first_name"]
+						fuck_w_2 = fuck_w_u_n[0]["last_name"]
+						fuck_w_n_f = fuck_w_1 + ' ' + fuck_w_2
+						send(id, '[id' + str(user) + '|' + fuck_n_f + '] ' + fuck_sex_s + ' [id' + str(fuck_w_n) + '|' + fuck_w_n_f + ']', fuck_p)
 
 					if "сатира сжечь" in event.obj.text.lower():
 						if (len(te2xt) == 2):
@@ -621,9 +635,11 @@ for event in longpoll.listen():
 							fire1 = msg.replace('сатира сжечь ', '')
 							fire_w_n = fire1.split("|")[0].replace("[id", "")
 
-						fire_r = open('arts\\fire.txt', 'r')
-						fire_p = fire_r.read().splitlines()
-						fire_r.close()
+						###Идентификатор альбома ----- 277598139
+						album_fire = vk_u.photos.get(owner_id=-201980948, album_id=277598139)
+						fire_p1 = random.choice(album_fire["items"])
+						fire_p = 'photo' + str(fire_p1["owner_id"]) + "_" + str(fire_p1["id"])
+
 						fire_n_u = vk.users.get(user_ids=user)
 						fire_n_1 = fire_n_u[0]["first_name"]
 						fire_n_2 = fire_n_u[0]["last_name"]
@@ -640,7 +656,7 @@ for event in longpoll.listen():
 						fire_w_1 = fire_w_u_n[0]["first_name"]
 						fire_w_2 = fire_w_u_n[0]["last_name"]
 						fire_w_n_f = fire_w_1 + ' ' + fire_w_2
-						send(id, '[id' + str(user) + '|' + fire_n_f + '] ' + fire_sex_s + ' [id' + str(fire_w_n) + '|' + fire_w_n_f + ']', random.choice(fire_p))		
+						send(id, '[id' + str(user) + '|' + fire_n_f + '] ' + fire_sex_s + ' [id' + str(fire_w_n) + '|' + fire_w_n_f + ']', fire_p)		
 
 					if msg in [COMMANDS[7]]:
 						sender(id, f''+ JOIN)
@@ -717,9 +733,11 @@ for event in longpoll.listen():
 							hit1 = msg.replace('сатира ударить ', '')
 							hit_w_n = hit1.split("|")[0].replace("[id", "")
 
-						hit_r = open('arts\\hit.txt', 'r')
-						hit_p = hit_r.read().splitlines()
-						hit_r.close()
+						###Идентификатор альбома ----- 277598253
+						album_hit = vk_u.photos.get(owner_id=-201980948, album_id=277598253)
+						hit_p1 = random.choice(album_hit["items"])
+						hit_p = 'photo' + str(hit_p1["owner_id"]) + "_" + str(hit_p1["id"])
+
 						hit_n_u = vk.users.get(user_ids=user)
 						hit_n_1 = hit_n_u[0]["first_name"]
 						hit_n_2 = hit_n_u[0]["last_name"]
@@ -736,7 +754,7 @@ for event in longpoll.listen():
 						hit_w_1 = hit_w_u_n[0]["first_name"]
 						hit_w_2 = hit_w_u_n[0]["last_name"]
 						hit_w_n_f = hit_w_1 + ' ' + hit_w_2
-						send(id, '[id' + str(user) + '|' + hit_n_f + '] ' + hit_sex_s + ' [id' + str(hit_w_n) + '|' + hit_w_n_f + ']', random.choice(hit_p))
+						send(id, '[id' + str(user) + '|' + hit_n_f + '] ' + hit_sex_s + ' [id' + str(hit_w_n) + '|' + hit_w_n_f + ']', hit_p)
 
 					if "сатира кража" in event.obj.text.lower():
 						if (len(te2xt) == 2):
@@ -747,9 +765,12 @@ for event in longpoll.listen():
 							steal_w_n = steal1.split("|")[0].replace("[id", "")
 							
 						steal_11 = ['трусы', 'трусы', 'трусы', 'девственность']
-						steal_r = open('arts\\steal.txt', 'r')
-						steal_p = steal_r.read().splitlines()
-						steal_r.close()
+
+						###Идентификатор альбома ----- 277598193
+						album_steal = vk_u.photos.get(owner_id=-201980948, album_id=277598193)
+						steal_p1 = random.choice(album_steal["items"])
+						steal_p = 'photo' + str(steal_p1["owner_id"]) + "_" + str(steal_p1["id"])
+
 						steal_n_u = vk.users.get(user_ids=user)
 						steal_n_1 = steal_n_u[0]["first_name"]
 						steal_n_2 = steal_n_u[0]["last_name"]
@@ -766,19 +787,19 @@ for event in longpoll.listen():
 						steal_w_1 = steal_w_u_n[0]["first_name"]
 						steal_w_2 = steal_w_u_n[0]["last_name"]
 						steal_w_n_f = steal_w_1 + ' ' + steal_w_2
-						send(id, '[id' + str(user) + '|' + steal_n_f + '] ' + steal_sex_s + ' [id' + str(steal_w_n) + '|' + steal_w_n_f + ']', random.choice(steal_p))	
+						send(id, '[id' + str(user) + '|' + steal_n_f + '] ' + steal_sex_s + ' [id' + str(steal_w_n) + '|' + steal_w_n_f + ']', steal_p)	
 
 					if msg in ['сатира загрустить']:
-						sad1 = msg.replace('сатира загрустить ', '')
-						sad_w_n = sad1.split("|")[0].replace("[id", "")
-						with open('art.json', encoding='utf-8') as f:
-							data = json.load(f)
+						###Идентификатор альбома ----- 277598026
+						album_sad = vk_u.photos.get(owner_id=-201980948, album_id=277598026)
+						sad_p1 = random.choice(album_sad["items"])
+						sad_p = 'photo' + str(sad_p1["owner_id"]) + "_" + str(sad_p1["id"])
+
 						sad_n_u = vk.users.get(user_ids=user)
 						sad_n_1 = sad_n_u[0]["first_name"]
 						sad_n_2 = sad_n_u[0]["last_name"]
 						sad_n_f = sad_n_1 + ' ' + sad_n_2
-						send(id, '[id' + str(user) + '|' + sad_n_f + '] ' + 'грустит', random.choice(data["kiss"]))
-						print(random.choice(data["kiss"]))
+						send(id, '[id' + str(user) + '|' + sad_n_f + '] ' + 'грустит', sad_p)
 
 					if msg in ['сатира орел и решка', 'сатира монетка']:
 						o_and_r = ['Выпал орёл', 'Выпала решка']
@@ -1098,14 +1119,6 @@ for event in longpoll.listen():
 							data = json.load(f)
 						sender(id, f'Браки этой беседы: <br>' + str(data))
 
-					if "сатира пол" in event.obj.text.lower():
-						se = msg.replace("сатира пол ", "")
-						useid = se.split("|")[0].replace("[id", "")
-						sex1 = vk_session.method('users.get', {'user_ids' : useid, 'fields' : 'sex', 'name_case' : 'nom'})
-						sex0 = sex1[0]
-						sex = json.dumps(sex0['sex'])
-						sender(id, 'Ваш секс: ' + str(sex))
-
 					if msg in ['сатира']:
 						helo_s = ['Приветствую! Чем могу помочь?', 'Приветствую!<br>Мои команды можешь узнать написав Cатира помощь']
 						sender(id, '' + random.choice(helo_s))
@@ -1215,7 +1228,7 @@ for event in longpoll.listen():
 						user_r_n_f = user_r_n_1 + ' ' + user_r_n_2
 						user_n_f_n = '[id' + str(user_r_fef_l_o) + '|' + user_r_n_f + ']'
 
-						who_acept = ['Я думаю ' + str(user_q_r[2]) + ' ' + user_n_f_n, 'Хмммм, мне кажется {user_q_r[2]}  -  {user_n_f_n}']
+						who_acept = ['Я думаю ' + str(user_q_r[2]) + ' ' + user_n_f_n, 'Хмммм, мне кажется ' + user_q_r[2] + " - " + user_n_f_n]
 
 						sender(id, random.choice(who_acept))
 
@@ -1319,7 +1332,7 @@ for event in longpoll.listen():
 
 					if msg in ['сатира кинь хентай']:
 
-						vid = vks.video.search(q='Хентай', count=100, adult=1)
+						vid = vks.video.search(q='Хентай аниме', count=100, adult=1)
 						vidH = vid['items']
 						vidHc = random.choice(vidH)
 						vid_id = vidHc['id']
@@ -1424,11 +1437,6 @@ for event in longpoll.listen():
 						except:
 							sender(id, 'Пользователи онлайн:' + sw_all)
 
-					if msg in ["н"]:
-						kid_reg = VkKeyboard(**settings)
-						kid_reg.add_callback_button(label='Написать', color=VkKeyboardColor.POSITIVE, payload={"type": "kid_reg"})
-						send_key(id, 'Для проверки нажмите на кнопку ниже', kid_reg.get_keyboard())
-
 					if msg in ["сатира курс биткоина"]:
 						url = 'https://www.rbc.ru/crypto/currency/btcusd'
 						response = requests.get(url)
@@ -1458,6 +1466,129 @@ for event in longpoll.listen():
 						koronavirus = VkKeyboard(**settings)
 						koronavirus.add_callback_button(label='Мир', color=VkKeyboardColor.PRIMARY, payload={"type": "koronavirus_menu"})
 						send_key(id, kowid_send, koronavirus.get_keyboard())
+
+					'''if msg in ["жмых"]:
+						audio = reply["attachments"][0]['audio_message']['link_ogg']
+						filename = "files/" + os.path.basename(audio).split('?')[0]
+						r = requests.get(audio)
+						with open(filename, 'wb') as f:
+							f.write(r.content)
+
+						if(os.path.isfile('files/render1.ogg')): os.remove('files/render1.ogg')
+						if(os.path.isfile('files/render2.ogg')): os.remove('files/render2.ogg')
+
+						cmd = f'ffmpeg -i {filename} -af "chorus=0.5:0.9:50|60|40:0.4|0.32|0.3:0.25|0.4|0.3:2|2.3|1.3" files/render1.ogg'
+						os.system(cmd)
+
+						cmd = f'ffmpeg -i files/render1.ogg -filter_complex "vibrato=f=15" files/render2.ogg'
+						os.system(cmd)
+
+					if msg in ["арты"]:
+						album_kiss = vk_u.photos.get(owner_id=-201980948, album_id=277597858)'''
+
+					if "арт+" in event.obj.text.lower():
+						if str(user) in admin_from:
+							if (len(te2xt) == 2):
+								art_c = msg.split(' ', 2)
+
+								if art_c[1] == 'поцеловать':
+									iendd = len(attachment[0]['photo']['sizes'])
+									photo = attachment[0]['photo']['sizes'][int(iendd - 1)]['url']
+									filename = "files/" + os.path.basename(photo).split('?')[0]
+									r = requests.get(photo)
+									with open(filename, 'wb') as f:
+										f.write(r.content)
+									
+									upload = VkUpload(vk_session_u)
+									ph = [filename]
+									photo_list = upload.photo(photos=ph, album_id=277597858, group_id=201980948)
+									sender(id, "Готово<br>Айди: " + str(photo_list[0]["id"]))
+									'''
+									owner_id = photo_list[0]["owner_id"]
+									id_own = photo_list[0]["id"]
+									attachment ='photo{}_{}'.format(owner_id,id_own)
+									send(id, '', attachment)'''
+
+								if art_c[1] == 'обнять':
+									iendd = len(attachment[0]['photo']['sizes'])
+									photo = attachment[0]['photo']['sizes'][int(iendd - 1)]['url']
+									filename = "files/" + os.path.basename(photo).split('?')[0]
+									r = requests.get(photo)
+									with open(filename, 'wb') as f:
+										f.write(r.content)
+									
+									upload = VkUpload(vk_session_u)
+									ph = [filename]
+									photo_list = upload.photo(photos=ph, album_id=277598460, group_id=201980948)
+									sender(id, "Готово<br>Айди: " + str(photo_list[0]["id"]))
+								
+								if art_c[1] == 'сжечь':
+									iendd = len(attachment[0]['photo']['sizes'])
+									photo = attachment[0]['photo']['sizes'][int(iendd - 1)]['url']
+									filename = "files/" + os.path.basename(photo).split('?')[0]
+									r = requests.get(photo)
+									with open(filename, 'wb') as f:
+										f.write(r.content)
+									
+									upload = VkUpload(vk_session_u)
+									ph = [filename]
+									photo_list = upload.photo(photos=ph, album_id=277598139, group_id=201980948)
+									sender(id, "Готово<br>Айди: " + str(photo_list[0]["id"]))
+
+								if art_c[1] == 'отшлëпать':
+									iendd = len(attachment[0]['photo']['sizes'])
+									photo = attachment[0]['photo']['sizes'][int(iendd - 1)]['url']
+									filename = "files/" + os.path.basename(photo).split('?')[0]
+									r = requests.get(photo)
+									with open(filename, 'wb') as f:
+										f.write(r.content)
+									
+									upload = VkUpload(vk_session_u)
+									ph = [filename]
+									photo_list = upload.photo(photos=ph, album_id=277598460, group_id=201980948)
+									sender(id, "Готово<br>Айди: " + str(photo_list[0]["id"]))
+
+					if "погода" in event.obj.text.lower():
+						if (len(te2xt) == 1) or (len(te2xt) == 2):
+							ecx = 0
+							if (len(te2xt) == 1):
+								try:
+									getCountry = vk.users.get(user_ids=str(user), fields="city")
+
+									city = getCountry[0]["city"]["title"]
+									print(city)
+								except Exception as e:
+									if str(e) == "'city'":
+										ecx = 1
+										sender(id, "Вы не указали свой город<br>Повторите запрос<br>Погода + город")
+
+							if (len(te2xt) == 2):
+								city = msgl.split(' ', 2)[1]
+							
+							if ecx == 0:
+								url = "http://api.openweathermap.org/data/2.5/weather"
+								parameters = {
+								'q': city,
+								'appid': "778d98cf94b6609bec655b872f24b907",
+								'units':'metric',
+								'lang' : 'ru'
+								}
+
+								res = requests.get(url, params = parameters)
+								data = res.json()
+
+								print(data)
+
+								if int(data['main']['temp']) <= 0:
+									t = '❄'
+								elif int(data['main']['temp']) > 0 < 15:
+									t = '☁'
+								elif int(data['main']['temp']) >= 20:
+									t = '☀'
+								elif int(data['main']['temp']) >= 15 < 20:
+									t = '🌥'
+
+								sender(id, "Погода в " + city.capitalize() + "<br>Погода: " + t + "<br>" + str(data['weather'][0]['description']).capitalize() + "<br>Температура: " + str(data['main']['temp']) + "<br>Скорость ветра: " + str(data['wind']['speed']))
 
 			except Exception as e:
 				print(e)
