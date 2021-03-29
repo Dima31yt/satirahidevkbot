@@ -1,7 +1,6 @@
 ## -*- coding: utf-8 -*-
 import vk_api, json, random, time, requests, wikipedia, os
 from vk_api import VkUpload
-from vkbottle import *
 from googletrans import Translator
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
