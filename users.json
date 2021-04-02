@@ -1,0 +1,80 @@
+{
+    "400484262": {
+        "first_name": "Дмитрий",
+        "last_name": "Князев",
+        "full_name": "Дмитрий Князев",
+        "id_name": "[id400484262|Дмитрий Князев]",
+        "money": 11101013,
+        "role": "Создатель",
+        "warn": 0,
+        "nick": "KnaZz",
+        "kid": "Нету",
+        "me_msg": 0,
+        "msg_money": 8
+    },
+    "286604762": {
+        "first_name": "Георгий",
+        "last_name": "Курманов",
+        "full_name": "Георгий Курманов",
+        "id_name": "[id286604762|Георгий Курманов]",
+        "money": 1000000,
+        "role": "Админ",
+        "warn": 0,
+        "nick": "georg_opk",
+        "kid": "Нету",
+        "me_msg": 0,
+        "msg_money": 4
+    },
+    "360873634": {
+        "first_name": "Александр",
+        "last_name": "Ртищев",
+        "full_name": "Александр Ртищев",
+        "id_name": "[id360873634|Александр Ртищев]",
+        "money": 1000000,
+        "role": "Создатель",
+        "warn": 0,
+        "nick": "KAVALISKI",
+        "kid": "Нету",
+        "me_msg": 0,
+        "msg_money": 6
+    },
+    "630877545": {
+        "first_name": "Никита",
+        "last_name": "Флэйковичь",
+        "full_name": "Никита Флэйковичь",
+        "id_name": "[id630877545|Никита Флэйковичь]",
+        "money": 1000001,
+        "role": "Админ",
+        "warn": 0,
+        "nick": "flake",
+        "kid": "Нету",
+        "me_msg": 0,
+        "msg_money": 5
+    },
+    "494922512": {
+        "first_name": "Алдар",
+        "last_name": "Бочаев",
+        "full_name": "Алдар Бочаев",
+        "id_name": "[id494922512|Алдар Бочаев]",
+        "money": 0,
+        "role": "Участник",
+        "warn": 0,
+        "nick": "none",
+        "kid": "none",
+        "me_msg": 0,
+        "msg_money": 0
+    },
+    "444915871": {
+        "first_name": "Антон",
+        "last_name": "Чубук",
+        "full_name": "Антон Чубук",
+        "id_name": "[id444915871|Антон Чубук]",
+        "money": 0,
+        "role": "Участник",
+        "warn": 0,
+        "nick": "none",
+        "kid": "none",
+        "me_msg": 0,
+        "msg_money": 1
+    }
+}

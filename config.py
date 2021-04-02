@@ -1,0 +1,1 @@
+main_token = '16e553407392aa4adecf1df8e0549ef95d36c559aa497c5c0745a9fcd8a5efc910d621a7bc104167c8fd9' #token который получили в настройках группы
