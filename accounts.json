@@ -1,0 +1,17 @@
+{
+    "user_account": [
+      {
+        "pod_token": ""
+      }
+    ],
+    "group_accounts": [
+      {
+        "group_token": "f0a6a9a8935609a66cf005a193e7abedde468a1f9fc285e433e721e0ac384fcd305ff774a0cce7cb404a1",
+        "group_id": 201980948
+      },
+      {
+        "group_token": "f0a6a9a8935609a66cf005a193e7abedde468a1f9fc285e433e721e0ac384fcd305ff774a0cce7cb404a1",
+        "group_id": 201980948
+      }
+    ]
+  }
