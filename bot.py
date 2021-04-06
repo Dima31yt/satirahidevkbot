@@ -149,7 +149,7 @@ wikipedia.set_lang("RU")
 #Параметр offset для поиска видео
 offset = 0
 
-send_moders_start = 0
+send_moders_start = 1
 if send_moders_start == 1:
 	sender_me(400484262, "Бот включен")
 	sender_me(360873634, "Бот включен")
